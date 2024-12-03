@@ -1,0 +1,227 @@
+/* noto-sans-regular - latin_latin-ext */
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: 'Noto Sans Webfonts';
+  font-style: normal;
+  font-weight: 400;
+  src:url('~@/assets/fonts/noto-sans-v36-latin_latin-ext/noto-sans-v36-latin_latin-ext-regular.woff2') format('woff2'), /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+       url('~@/assets/fonts/noto-sans-v36-latin_latin-ext/noto-sans-v36-latin_latin-ext-regular.woff') format('woff'), /* Chrome 5+, Firefox 3.6+, IE 9+, Safari 5.1+, iOS 5+ */
+       url('~@/assets/fonts/noto-sans-v36-latin_latin-ext/noto-sans-v36-latin_latin-ext-regular.ttf') format('truetype'), /* Chrome 4+, Firefox 3.5+, IE 9+, Safari 3.1+, iOS 4.2+, Android Browser 2.2+ */
+       url('~@/assets/fonts/noto-sans-v36-latin_latin-ext/noto-sans-v36-latin_latin-ext-regular.svg#NotoSans') format('svg'); /* Legacy iOS */
+}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+
+  body {
+    font-family: 'Noto Sans Webfonts', 'Noto Sans', serif;
+  }
+
+  h1 {
+    @apply text-2xl;
+    @apply sm:text-3xl;
+    @apply md:text-4xl;
+  }
+
+  h2 {
+    @apply text-xl;
+    @apply sm:text-2xl;
+    @apply md:text-3xl;
+    @apply break-words;
+  }
+
+  h3 {
+    @apply text-lg;
+    @apply md:text-2xl;
+  }
+
+  h4 {
+    @apply text-lg;
+    @apply md:text-xl;
+  }
+
+  h1, h2, h3, h4, p, span {
+    @apply break-words;
+  }
+
+
+  a {
+    /* @apply underline; */
+    /* @apply text-blue-dark; */
+  }
+
+  p a:hover {
+    @apply underline;
+  }
+
+  li a:hover {
+    @apply underline;
+  }
+}
+
+@layer utilities {
+  .max-height-large {
+    max-height: 1000px;
+  }
+}
+
+@font-face {
+  font-family: coranica;
+  src: url('~@/assets/fonts/coranica_1164.ttf');
+}
+
+.arabic {
+  font-family: coranica, noto-sans, sans-serif;
+  text-align: right;
+  direction: rtl;
+}
+
+.round-image img {
+  @apply rounded-full
+}
+
+.htmlContent ul, ul.htmlContent {
+  @apply list-disc;
+  @apply pl-5;
+}
+
+.openseadragon-message{
+  @apply text-white;
+  @apply text-xl;
+  @apply bg-black !important;
+  @apply z-50;
+  @apply absolute !important;
+}
+
+.openseadragon-canvas{
+  @apply z-10;
+}
+
+.referencestrip{
+  @apply z-20;
+}
+
+.showLinks a {
+  /* @apply underline; */
+  @apply text-blue-dark;
+}
+
+.showTable table {
+  @apply border;
+}
+
+.spaceHeaders h3 {
+  @apply pt-4;
+}
+
+.spaceHeaders h4 {
+  @apply pt-3;
+}
+
+.spaceParagraphsSmall p {
+  @apply py-0.5;
+}
+
+.showTable th {
+  @apply border;
+}
+
+.showTable td {
+  @apply border;
+}
+
+.spaceParagraphs p {
+  @apply pt-6;
+}
+
+.transliteration tr {
+  @apply text-xl;
+  @apply md:text-3xl;
+}
+
+.transliteration td {
+  @apply py-1.5;
+}
+
+.transliteration .linenumber {
+  @apply px-2;
+}
+
+/*//////Transliteration markings - move to separate file/////////////*/
+.added {
+  background-color: #66FF33
+}
+
+.missing {
+  background-color: #FFED01
+}
+
+.variation {
+  background-color: #C6D9F1
+}
+
+.modified {
+  background-color: #4FD1FF
+}
+
+.erased {
+  background-color: #FFB7B7
+}
+
+.unclear {
+  background-color: #FDE9D9
+}
+
+.unavailable {
+  color: gray;
+  opacity: 0.5;
+}
+
+/*/////////////////////////*/
+
+.csl-bib-body {
+  @apply py-0.5;
+}
+
+#tooltip {
+  @apply hidden;
+}
+
+#tooltip[data-show] {
+  @apply block;
+}
+
+
+.loader {
+  border-top-color: #3c4540;
+  -webkit-animation: spinner 1.5s linear infinite;
+  animation: spinner 1.5s linear infinite;
+}
+
+@-webkit-keyframes spinner {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+@keyframes spinner {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.infoitem {
+  @apply my-4;
+}
+.infoitem P {
+  @apply my-3;
+}

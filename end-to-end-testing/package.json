@@ -1,0 +1,10 @@
+{
+    "scripts": {
+        "local": "npx cypress run --headed --browser chrome -c baseUrl=http://localhost:8080",
+        "stage": "npx cypress run --headed --browser chrome -c baseUrl=https://corpuscoranicum.docker-dev.bbaw.de",
+        "prod": "npx cypress run --headed --browser chrome -c baseUrl=https://corpuscoranicum.de"
+    },
+    "dependencies": {
+        "cypress": "^9.5.1"
+    }
+}

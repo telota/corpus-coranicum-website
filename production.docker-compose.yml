@@ -1,0 +1,43 @@
+services:
+  frontend:
+    build:
+      context: frontend
+      args:
+        VUE_APP_BACKEND_URL: https://api.test.de
+    ports:
+      - 26727:80
+    restart: always
+    volumes:
+      - /mnt/test/pdf:/usr/share/test/html/pdf
+      - /mnt/test/public/img:/usr/share/test/html/img
+      - /mnt/test/docker/mounted-volumes/corpus_coranicum_logs/frontend_nginx:/var/log/nginx
+  nginx_backend:
+    build:
+      context: backend
+      dockerfile: nginx.Dockerfile
+    ports:
+      - 26728:80
+    restart: always
+    volumes:
+      - /mnt/test/docker/mounted-volumes/corpus_coranicum_logs/backend_nginx:/var/log/nginx
+  php_backend:
+    build:
+      context: backend
+      dockerfile: php.Dockerfile
+    env_file:
+      - ./backend/.env
+    environment:
+      APP_ENV: production
+      APP_DEBUG: "false"
+      APP_URL: "https://api.test.de"
+      XML_FILES_FOLDER: "./corpus_coranicum_xml_files"
+      LOG_CHANNEL: daily
+      LOG_LEVEL: info
+      DB_CONNECTION: mysql
+      DB_HOST: test.de
+      DB_DATABASE: corpuscoranicum
+      DB_USERNAME: user
+    restart: always
+    volumes:
+      - ../corpus_coranicum_xml_files:/backend/corpus_coranicum_xml_files
+      - /mnt/test/docker/mounted-volumes/corpus_coranicum_logs/laravel:/backend/storage/logs

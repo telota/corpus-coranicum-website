@@ -1,0 +1,8 @@
+# This docker-compose is just for quickly testing the frontend nginx config 
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: DockerfileNginxLocal
+    ports:
+      - 8080:80

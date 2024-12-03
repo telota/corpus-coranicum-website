@@ -1,0 +1,35 @@
+@startuml
+title Entity Relationships in the Corpus Coranicum
+
+(\n\t\tQuran\t\t\n) as (Quran)
+
+(Quran) ---> (Suras) : has 114
+(Suras) --> (Verses) : have between 3 and 286
+(Verses) --> (Words) : have between 11 and 256
+(Words) --> (Parses) : have
+(Parses) --> (Roots) : contain
+
+
+(Quran) <--- (Print Quran): contains in jpeg form
+(Print Quran) --> (Pages): contains ~826
+(Pages) --> (Verses): have continuous range of
+
+
+(Manuscripts) --> (Manuscript Pages) : contain
+(Quran) <--- (Manuscript Pages): contain sections of  
+
+(Intertexts) --> (Verses): refer to a range of
+
+(Concordance) --> (Concordance Words) : contains all
+(Glossary) --> (Concordance Words) : contains some
+(Concordance Words) --> (Roots) : contains some
+(Concordance Words) --> (Words) : contains some
+
+
+(Periods) --> (Suras) : organize
+(Period Commentaries) --> (Periods) : comment on
+(Sura Commentaries) --> (Suras) : comment on  
+
+(Quran) <-- (Variant Readings) : usually contain the entire
+(Variant Readings) --> (Words) : contain deviant 
+@enduml

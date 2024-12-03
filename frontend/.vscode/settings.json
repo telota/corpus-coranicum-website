@@ -1,0 +1,13 @@
+{
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
+  "vetur.format.defaultFormatterOptions": {
+    "prettier": {
+      "eslintIntegration": true,
+      "semi": false,
+      "singleQuote": true,
+      "tabWidth": 2
+    }
+  }
+}

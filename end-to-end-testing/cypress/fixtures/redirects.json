@@ -1,0 +1,150 @@
+[
+	{
+		"old": "/about/forschung",
+		"new": "/about/research"
+	},
+	{
+		"old": "/about/index",
+		"new": "/about"
+	},
+	{
+		"old": "/about/index/sure/4/vers/1",
+		"new": "/about"
+	},
+	{
+		"old": "/about/materialien",
+		"new": "/about/sources"
+	},
+	{
+		"old": "/about/mitarbeiter",
+		"new": "/about/team"
+	},
+	{
+		"old": "/about/veranstaltungen",
+		"new": "/about/events"
+	},
+	{
+		"old": "/handschriften",
+		"new": "/manuscripts"
+	},
+	{
+		"old": "/handschriften/einleitung",
+		"new": "/manuscripts"
+	},
+	{
+		"old": "/handschriften/index/sure/1/vers/3",
+		"new": "/verse-navigator/sura/1/verse/3/manuscripts"
+	},
+	{
+		"old": "/handschriften/index/sure/1/vers/1/handschrift/52",
+		"new": "/manuscripts/52?sura=1&verse=1"
+	},
+	{
+		"old": "/handschriften/index/sure/002/vers/095/handschrift/498/bildversion/2",
+		"new": "/manuscripts/498?sura=002&verse=095"
+	},
+	{
+		"old": "/handschriften/index/sure/19/vers/36/handschrift/510/flip/1",
+		"new": "/manuscripts/510?sura=19&verse=36"
+	},
+	{
+		"old": "/handschriften/index/sure/19/vers/44?handschrift=510",
+		"new": "/manuscripts/510?sura=19&verse=44"
+	},
+	{
+		"old": "/verse-navigator/sura/19/verse/44/manuscripts/510",
+		"new": "/manuscripts/510?sura=19&verse=44"
+	},
+	{
+		"old": "/verse-navigator/sura/19/verse/44/manuscripts/510/page/6v",
+		"new": "/manuscripts/510/page/6v?sura=19&verse=44"
+	},
+	{
+		"old": "/handschriften/uebersicht",
+		"new": "/manuscripts"
+	},
+	{
+		"old": "/index/einleitung",
+		"new": ""
+	},
+	{
+		"old": "/index/faq",
+		"new": "/faq"
+	},
+	{
+		"old": "/index/index/sure/2/vers/281",
+		"new": "/verse-navigator/sura/2/verse/281/print"
+	},
+	{
+		"old": "/index/kontakt",
+		"new": "/contact"
+	},
+	{
+		"old": "/index/impressum",
+		"new": "/imprint"
+	},
+	{
+		"old": "/kommentar",
+		"new": "/commentary"
+	},
+	{
+		"old": "/kommentar/einleitung",
+		"new": "/commentary"
+	},
+	{
+		"old": "/kommentar/index",
+		"new": "/commentary"
+	},
+	{
+		"old": "/kommentar/index/sure/103/vers/2",
+		"new": "/verse-navigator/sura/103/verse/2/commentary"
+	},
+	{
+		"old": "/konkordanz/index/sure/3/vers/10/wort/16",
+		"new": "/verse-navigator/sura/3/verse/10/concordance/word/16"
+	},
+	{
+		"old": "/kontexte",
+		"new": "/intertexts"
+	},
+	{
+		"old": "/kontexte/index",
+		"new": "/intertexts"
+	},
+	{
+		"old": "/kontexte/index/intertext/669",
+		"new": "/verse-navigator/sura/1/verse/1/intertexts/669"
+	},
+	{
+		"old": "/kontexte/index/sure/37/vers/102",
+		"new": "/verse-navigator/sura/37/verse/102/intertexts"
+	},
+	{
+		"old": "/kontexte/index/sure/37/vers/102/intertext/465",
+		"new": "/verse-navigator/sura/37/verse/102/intertexts/465"
+	},
+	{
+		"old": "/kontexte/index/sure/22/vers/5/intertext/986/redirect/1",
+		"new": "/verse-navigator/sura/22/verse/5/intertexts/986"
+	},
+	{
+		"old": "/kontexte/uebersicht",
+		"new": "/intertexts"
+	},
+	{
+		"old": "/lesarten",
+		"new": "/variants"
+	},
+	{
+		"old": "/lesarten/einleitung",
+		"new": "/variants"
+	},
+	{
+		"old": "/lesarten/index/sure/3/vers/10",
+		"new": "/verse-navigator/sura/3/verse/10/variants"
+	},
+	{
+		"old": "/lesarten/uebersicht",
+		"new": "/variants"
+	}
+]

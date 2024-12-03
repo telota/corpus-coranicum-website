@@ -1,0 +1,42 @@
+[
+    {
+        "path": "",
+        "content": [
+            "Informationen zum Projektvorhaben und weitere Hilfsmittel",
+            "Was die Muslime schon immer sagten"
+        ]
+    },
+    {
+        "path": "/intertexts",
+        "content": ["Awestisch", "Gedicht Nr. 34:23-32 (Schulthess) (TUK 525)"]
+    },
+    {
+        "path": "/manuscripts",
+        "content": [
+            "Oriental Institute of the University of Chicago (Chicago, US)",
+            "Chicago, Oriental Institute: A 6975a",
+            "Detroit (Michigan), Detroit Institute of Arts: 30.317",
+            "Das Tareq Rajab Museum ist ein 1980 eröffnetes Privatmuseum"
+        ]
+    },
+    {
+        "path": "/verse-navigator/sura/10/verse/93/manuscripts",
+        "content":[
+            "Berlin, Staatsbibliothek: Landberg 834 (Ahlwardt 327)",
+            "Leiden, Universiteitsbibliotheek: Or. 6814",
+            "Paris, Bibliothèque nationale de France: Arabe 5122"
+        ]
+    },
+    {
+        "path": "/verse-navigator/sura/10/verse/93/manuscripts/165/page/27v",
+        "content":[
+            "Institute of Oriental Manuscripts of the Russian Academy of Sciences",
+            "Pergament",
+            "Bild kann aus urheberrechtlichen Gründen nicht angezeigt werden.",
+            "Transliteration",
+            "ببدنک لتكون لمن خلفک",
+            "Und wir zogen mit den Kindern Israels durch das Meer."
+        ]
+    }
+
+]

@@ -1,0 +1,81 @@
+services:
+  frontend:
+    build:
+      context: frontend
+      args:
+        VUE_APP_BACKEND_URL: https://test.de
+    environment:
+      - VIRTUAL_HOST=test.de
+      - VIRTUAL_PORT=80
+      - LETSENCRYPT_HOST=test.de
+      - LETSENCRYPT_EMAIL=test@test.de
+      - NETWORK_ACCESS=internal
+    restart: always
+    labels:
+      - "io.portainer.accesscontrol.teams=test"
+    networks:
+      - reverse-proxy
+  nginx_backend:
+    build: 
+      context: backend
+      dockerfile: nginx.Dockerfile
+    ports:
+      - 26728:80
+    environment:
+      VIRTUAL_HOST: test.de
+      VIRTUAL_PORT: 80
+      LETSENCRYPT_HOST: test.de
+      LETSENCRYPT_EMAIL: test@test.de
+      NETWORK_ACCESS: internal
+    labels:
+      - "io.portainer.accesscontrol.teams=test"
+    networks:
+      - reverse-proxy
+  php_backend:
+    build: 
+      context: backend
+      dockerfile: php.Dockerfile
+    env_file:
+      - ./backend/.env
+    environment:
+      APP_ENV: production
+      APP_DEBUG: "true"
+      APP_URL: "https://test.de"
+      LOG_CHANNEL: daily
+      XML_FILES_FOLDER: "./corpus_coranicum_xml_files"
+      DB_CONNECTION: mysql
+      DB_HOST: db
+      DB_PORT: 3306
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: corpuscoranicum
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    restart: always
+    labels:
+      - "io.portainer.accesscontrol.teams=test"
+    networks:
+      - reverse-proxy
+    volumes:
+      - ../corpus_coranicum_xml_files:/backend/corpus_coranicum_xml_files
+  db:
+    image: mysql:5.7.37
+    cap_add:
+      # https://stackoverflow.com/questions/55559386/how-to-fix-mbind-operation-not-permitted-in-mysql-error-log
+      - SYS_NICE
+    command: --max_allowed_packet=32505856      # Set max_allowed_packet to 256M (or any other value)
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: corpuscoranicum
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    volumes:
+      - ./dump.sql:/docker-entrypoint-initdb.d/dump.sql
+    restart: always
+    labels:
+      - "io.portainer.accesscontrol.teams=test"
+    networks:
+      - reverse-proxy
+
+networks:
+  reverse-proxy:
+    external: true

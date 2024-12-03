@@ -1,0 +1,2642 @@
+-- MySQL dump 10.13  Distrib 8.0.40, for Linux (x86_64)
+--
+-- Host: corpuscoranicum.de    Database: corpuscoranicum
+-- ------------------------------------------------------
+-- Server version	5.7.42-0ubuntu0.18.04.1-log
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!50503 SET NAMES utf8mb4 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `belegstellen`
+--
+
+DROP TABLE IF EXISTS `belegstellen`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `belegstellen` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `Titel` varchar(1000) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Sprache` varchar(1000) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `Sprache_richtung` varchar(3) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `Ort` varchar(1000) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `Datierung` text COLLATE utf8mb4_unicode_ci,
+  `Edition` text COLLATE utf8mb4_unicode_ci,
+  `Uebersetzung` text COLLATE utf8mb4_unicode_ci,
+  `Identifikator` text COLLATE utf8mb4_unicode_ci,
+  `Textsorte` text COLLATE utf8mb4_unicode_ci,
+  `HinweiseaufEdition` text COLLATE utf8mb4_unicode_ci,
+  `SchlagwortPersonen` text COLLATE utf8mb4_unicode_ci,
+  `SchlagwortOrte` text COLLATE utf8mb4_unicode_ci,
+  `SchlagwortSonst` text COLLATE utf8mb4_unicode_ci,
+  `Stichwort` text COLLATE utf8mb4_unicode_ci,
+  `TextstelleKoran` text COLLATE utf8mb4_unicode_ci,
+  `Anmerkungen` text COLLATE utf8mb4_unicode_ci,
+  `Anmerkungen_en` text COLLATE utf8mb4_unicode_ci,
+  `Uebersetzer` text COLLATE utf8mb4_unicode_ci,
+  `Bearbeiter` text COLLATE utf8mb4_unicode_ci,
+  `Einstelldatum` text COLLATE utf8mb4_unicode_ci,
+  `Anderungsdatum` text COLLATE utf8mb4_unicode_ci,
+  `Originalsprache` text COLLATE utf8mb4_unicode_ci,
+  `Transkription` text COLLATE utf8mb4_unicode_ci,
+  `Uebersetzung_dt` text COLLATE utf8mb4_unicode_ci,
+  `Uebersetzung_en` text COLLATE utf8mb4_unicode_ci,
+  `Uebersetzung_fr` text COLLATE utf8mb4_unicode_ci,
+  `Uebersetzung_ar` text COLLATE utf8mb4_unicode_ci,
+  `Autor` text COLLATE utf8mb4_unicode_ci,
+  `allfields` text COLLATE utf8mb4_unicode_ci,
+  `webtauglich` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Bibeltext` text COLLATE utf8mb4_unicode_ci,
+  `Vermittlungssprache` text COLLATE utf8mb4_unicode_ci,
+  `Literatur` text COLLATE utf8mb4_unicode_ci,
+  `kategorie` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `lastAuthor` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `belegstellen_kategorie_index` (`kategorie`)
+) ENGINE=InnoDB AUTO_INCREMENT=1643 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `belegstellen_bearbeiter`
+--
+
+DROP TABLE IF EXISTS `belegstellen_bearbeiter`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `belegstellen_bearbeiter` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `belegstelle` int(11) NOT NULL,
+  `bearbeiter` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `zusatz` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `belegstellen_bearbeiter_belegstelle_foreign` (`belegstelle`),
+  CONSTRAINT `belegstellen_bearbeiter_belegstelle_foreign` FOREIGN KEY (`belegstelle`) REFERENCES `belegstellen` (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=3253 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `belegstellen_bilder`
+--
+
+DROP TABLE IF EXISTS `belegstellen_bilder`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `belegstellen_bilder` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `belegstelle` int(11) NOT NULL,
+  `bildlink` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `bildnachweis` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=188 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `belegstellen_kategorie`
+--
+
+DROP TABLE IF EXISTS `belegstellen_kategorie`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `belegstellen_kategorie` (
+  `id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `classification` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `supercategory` int(11) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `belegstellen_mapping`
+--
+
+DROP TABLE IF EXISTS `belegstellen_mapping`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `belegstellen_mapping` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `belegstelle` int(11) NOT NULL,
+  `sure_start` int(11) NOT NULL,
+  `vers_start` int(11) NOT NULL,
+  `sure_ende` int(11) NOT NULL,
+  `vers_ende` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `belegstellen_mapping_belegstelle_index` (`belegstelle`)
+) ENGINE=InnoDB AUTO_INCREMENT=529000 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `blog`
+--
+
+DROP TABLE IF EXISTS `blog`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `blog` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `title` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `entry_content` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `author` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `cc_author_roles`
+--
+
+DROP TABLE IF EXISTS `cc_author_roles`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `cc_author_roles` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `author_id` int(10) unsigned NOT NULL,
+  `role_id` int(10) unsigned NOT NULL,
+  `created_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `updated_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `cc_author_roles_author_id_role_id_unique` (`author_id`,`role_id`),
+  KEY `cc_author_roles_role_id_foreign` (`role_id`),
+  CONSTRAINT `cc_author_roles_author_id_foreign` FOREIGN KEY (`author_id`) REFERENCES `cc_authors` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `cc_author_roles_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `cc_roles` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=106 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='It represents the role of a certain author.';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `cc_authors`
+--
+
+DROP TABLE IF EXISTS `cc_authors`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `cc_authors` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `author_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `author_description` text COLLATE utf8mb4_unicode_ci,
+  `created_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `updated_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `cc_authors_author_name_unique` (`author_name`)
+) ENGINE=InnoDB AUTO_INCREMENT=55 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='It represents all authors in the Corpus Coranicum project including colleagues and extern.';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `cc_modules`
+--
+
+DROP TABLE IF EXISTS `cc_modules`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `cc_modules` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `module_name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `module_description` text COLLATE utf8mb4_unicode_ci,
+  `created_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `updated_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `cc_modules_module_name_unique` (`module_name`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='It represents and describes all modules in the Corpus Coranicum project.';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `cc_roles`
+--
+
+DROP TABLE IF EXISTS `cc_roles`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `cc_roles` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `role_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `module_id` int(10) unsigned NOT NULL,
+  `role_description` text COLLATE utf8mb4_unicode_ci,
+  `created_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `updated_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `cc_roles_role_name_module_id_unique` (`role_name`,`module_id`),
+  KEY `cc_roles_module_id_foreign` (`module_id`),
+  CONSTRAINT `cc_roles_module_id_foreign` FOREIGN KEY (`module_id`) REFERENCES `cc_modules` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='It represents and describes the roles of authors in the project.';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `cc_translation_languages`
+--
+
+DROP TABLE IF EXISTS `cc_translation_languages`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `cc_translation_languages` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `translation_language` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `updated_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `cc_translation_languages_translation_language_unique` (`translation_language`)
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='It represents the languages of translation texts.';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `collegium_coranicum`
+--
+
+DROP TABLE IF EXISTS `collegium_coranicum`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `collegium_coranicum` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `titel` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `datum_start` datetime NOT NULL,
+  `datum_ende` datetime NOT NULL,
+  `ort` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `beschreibung` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `user_id` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `collegium_coranicum_user_id_foreign` (`user_id`),
+  CONSTRAINT `collegium_coranicum_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `glossarbelege`
+--
+
+DROP TABLE IF EXISTS `glossarbelege`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `glossarbelege` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `glossarium_id` int(11) NOT NULL,
+  `typ` text COLLATE utf8mb4_unicode_ci,
+  `belegstelle` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `bearbeiter` text COLLATE utf8mb4_unicode_ci,
+  `ort` text COLLATE utf8mb4_unicode_ci,
+  `datierung` text COLLATE utf8mb4_unicode_ci,
+  `uebersetzung_nachweis` text COLLATE utf8mb4_unicode_ci,
+  `originaltext` text COLLATE utf8mb4_unicode_ci,
+  `umschrift` text COLLATE utf8mb4_unicode_ci,
+  `bildlink` text COLLATE utf8mb4_unicode_ci,
+  `edition` text COLLATE utf8mb4_unicode_ci,
+  `uebersetzung` text COLLATE utf8mb4_unicode_ci,
+  `anmerkung` text COLLATE utf8mb4_unicode_ci,
+  `sprache` text COLLATE utf8mb4_unicode_ci,
+  PRIMARY KEY (`id`),
+  KEY `glossarbelege_glossarium_id_foreign` (`glossarium_id`),
+  CONSTRAINT `glossarbelege_glossarium_id_foreign` FOREIGN KEY (`glossarium_id`) REFERENCES `glossarium` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=312 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `glossarium`
+--
+
+DROP TABLE IF EXISTS `glossarium`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `glossarium` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `wort` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `wurzel` text COLLATE utf8mb4_unicode_ci,
+  `literatur` text COLLATE utf8mb4_unicode_ci,
+  `anmerkungen` text COLLATE utf8mb4_unicode_ci,
+  `bearbeiter` text COLLATE utf8mb4_unicode_ci,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=339 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `html_content`
+--
+
+DROP TABLE IF EXISTS `html_content`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `html_content` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `label` varchar(300) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `de` text COLLATE utf8mb4_unicode_ci,
+  `en` text COLLATE utf8mb4_unicode_ci,
+  `fr` text COLLATE utf8mb4_unicode_ci,
+  `created_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `updated_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `it_categories`
+--
+
+DROP TABLE IF EXISTS `it_categories`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `it_categories` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `category_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `classification` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `supercategory` int(10) unsigned DEFAULT NULL,
+  `created_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `updated_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `it_categories_category_name_unique` (`category_name`),
+  UNIQUE KEY `unique_index` (`category_name`,`supercategory`),
+  KEY `it_categories_supercategory_foreign` (`supercategory`),
+  CONSTRAINT `it_categories_supercategory_foreign` FOREIGN KEY (`supercategory`) REFERENCES `it_categories` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=124 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Old table: belegstellen_kategorie. It represents the category of intertexts.';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `it_category_information_authors`
+--
+
+DROP TABLE IF EXISTS `it_category_information_authors`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `it_category_information_authors` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `info_author_id` int(10) unsigned NOT NULL,
+  `category_id` int(10) unsigned NOT NULL,
+  `created_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `updated_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `unique_index` (`info_author_id`,`category_id`),
+  KEY `it_category_information_authors_category_id_foreign` (`category_id`),
+  CONSTRAINT `it_category_information_authors_category_id_foreign` FOREIGN KEY (`category_id`) REFERENCES `it_categories` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `it_category_information_authors_info_author_id_foreign` FOREIGN KEY (`info_author_id`) REFERENCES `cc_authors` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='It represents the authors of a certain category information text.';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `it_category_information_translations`
+--
+
+DROP TABLE IF EXISTS `it_category_information_translations`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `it_category_information_translations` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `language_id` int(10) unsigned NOT NULL,
+  `category_id` int(10) unsigned NOT NULL,
+  `translator_id` int(10) unsigned NOT NULL,
+  `information_translation_reference` text COLLATE utf8mb4_unicode_ci,
+  `information_translation` text COLLATE utf8mb4_unicode_ci,
+  `created_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `updated_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `unique_index` (`language_id`,`category_id`,`translator_id`),
+  KEY `it_category_information_translations_category_id_foreign` (`category_id`),
+  KEY `it_category_information_translations_translator_id_foreign` (`translator_id`),
+  CONSTRAINT `it_category_information_translations_category_id_foreign` FOREIGN KEY (`category_id`) REFERENCES `it_categories` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `it_category_information_translations_language_id_foreign` FOREIGN KEY (`language_id`) REFERENCES `cc_translation_languages` (`id`),
+  CONSTRAINT `it_category_information_translations_translator_id_foreign` FOREIGN KEY (`translator_id`) REFERENCES `cc_authors` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='It represents the translation of a certain category information text.';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `it_intertext`
+--
+
+DROP TABLE IF EXISTS `it_intertext`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `it_intertext` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `source_id` int(10) unsigned DEFAULT NULL,
+  `source_chapter` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `language_id` int(10) unsigned DEFAULT NULL,
+  `language_direction` varchar(3) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `source_text_original` text COLLATE utf8mb4_unicode_ci,
+  `source_text_transcription` text COLLATE utf8mb4_unicode_ci,
+  `script_id` int(10) unsigned DEFAULT NULL,
+  `place` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `intertext_date_start` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `intertext_date_end` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `source_text_edition` text COLLATE utf8mb4_unicode_ci,
+  `explanation_about_edition` text COLLATE utf8mb4_unicode_ci,
+  `tuk_reference` text COLLATE utf8mb4_unicode_ci,
+  `quran_text` text COLLATE utf8mb4_unicode_ci,
+  `entry` text COLLATE utf8mb4_unicode_ci,
+  `is_online` tinyint(4) NOT NULL DEFAULT '0',
+  `category_id` int(10) unsigned DEFAULT NULL,
+  `keyword_persons` text COLLATE utf8mb4_unicode_ci,
+  `keyword_places` text COLLATE utf8mb4_unicode_ci,
+  `keyword_others` text COLLATE utf8mb4_unicode_ci,
+  `keyword` text COLLATE utf8mb4_unicode_ci,
+  `doi` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `updated_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `published_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `unique_index` (`source_id`,`source_chapter`),
+  KEY `it_intertext_language_id_foreign` (`language_id`),
+  KEY `it_intertext_script_id_foreign` (`script_id`),
+  KEY `it_intertext_category_id_foreign` (`category_id`),
+  KEY `it_intertext_is_online_index` (`is_online`),
+  CONSTRAINT `it_intertext_category_id_foreign` FOREIGN KEY (`category_id`) REFERENCES `it_categories` (`id`),
+  CONSTRAINT `it_intertext_language_id_foreign` FOREIGN KEY (`language_id`) REFERENCES `it_original_languages` (`id`),
+  CONSTRAINT `it_intertext_script_id_foreign` FOREIGN KEY (`script_id`) REFERENCES `it_scripts` (`id`),
+  CONSTRAINT `it_intertext_source_id_foreign` FOREIGN KEY (`source_id`) REFERENCES `it_sources` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1636 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Old table: belegstellen. It represents the metadata of intertexts.';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `it_intertext_authors`
+--
+
+DROP TABLE IF EXISTS `it_intertext_authors`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `it_intertext_authors` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `intertext_id` int(10) unsigned NOT NULL,
+  `author_id` int(10) unsigned NOT NULL,
+  `addition` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `updated_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `unique_index` (`intertext_id`,`author_id`),
+  KEY `it_intertext_authors_author_id_foreign` (`author_id`),
+  CONSTRAINT `it_intertext_authors_author_id_foreign` FOREIGN KEY (`author_id`) REFERENCES `cc_authors` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `it_intertext_authors_intertext_id_foreign` FOREIGN KEY (`intertext_id`) REFERENCES `it_intertext` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Old table: belegstellen_bearbeiter. It represents the authors of a certain intertext.';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `it_intertext_collaborators`
+--
+
+DROP TABLE IF EXISTS `it_intertext_collaborators`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `it_intertext_collaborators` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `intertext_id` int(10) unsigned NOT NULL,
+  `author_id` int(10) unsigned NOT NULL,
+  `created_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `updated_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `unique_index` (`intertext_id`,`author_id`),
+  KEY `it_intertext_collaborators_author_id_foreign` (`author_id`),
+  CONSTRAINT `it_intertext_collaborators_author_id_foreign` FOREIGN KEY (`author_id`) REFERENCES `cc_authors` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `it_intertext_collaborators_intertext_id_foreign` FOREIGN KEY (`intertext_id`) REFERENCES `it_intertext` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='It represents the collaborators of a certain intertext.';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `it_intertext_entry_translations`
+--
+
+DROP TABLE IF EXISTS `it_intertext_entry_translations`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `it_intertext_entry_translations` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `language_id` int(10) unsigned NOT NULL,
+  `intertext_id` int(10) unsigned NOT NULL,
+  `translator_id` int(10) unsigned NOT NULL,
+  `entry_translation` text COLLATE utf8mb4_unicode_ci,
+  `created_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `updated_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `unique_index` (`language_id`,`intertext_id`,`translator_id`),
+  KEY `it_intertext_entry_translations_intertext_id_foreign` (`intertext_id`),
+  KEY `it_intertext_entry_translations_translator_id_foreign` (`translator_id`),
+  CONSTRAINT `it_intertext_entry_translations_intertext_id_foreign` FOREIGN KEY (`intertext_id`) REFERENCES `it_intertext` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `it_intertext_entry_translations_language_id_foreign` FOREIGN KEY (`language_id`) REFERENCES `cc_translation_languages` (`id`),
+  CONSTRAINT `it_intertext_entry_translations_translator_id_foreign` FOREIGN KEY (`translator_id`) REFERENCES `cc_authors` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='It represents the translation of an entry text.';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `it_intertext_illustrations`
+--
+
+DROP TABLE IF EXISTS `it_intertext_illustrations`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `it_intertext_illustrations` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `intertext_id` int(10) unsigned NOT NULL,
+  `image_link` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `licence_for_image` text COLLATE utf8mb4_unicode_ci,
+  `created_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `updated_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `unique_index` (`intertext_id`,`image_link`),
+  UNIQUE KEY `it_intertext_illustrations_image_link_unique` (`image_link`),
+  CONSTRAINT `it_intertext_illustrations_intertext_id_foreign` FOREIGN KEY (`intertext_id`) REFERENCES `it_intertext` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=183 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Old table: belegstellen_bilder. It represents the image of a certain intertext.';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `it_intertext_mapping`
+--
+
+DROP TABLE IF EXISTS `it_intertext_mapping`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `it_intertext_mapping` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `intertext_id` int(10) unsigned NOT NULL,
+  `sure_start` decimal(3,0) NOT NULL,
+  `vers_start` decimal(3,0) NOT NULL,
+  `sure_end` decimal(3,0) NOT NULL,
+  `vers_end` decimal(3,0) NOT NULL,
+  `created_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `updated_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `unique_index` (`intertext_id`,`sure_start`,`vers_start`,`sure_end`,`vers_end`),
+  KEY `it_intertext_mapping_intertext_id_index` (`intertext_id`),
+  KEY `mapping_index` (`sure_start`,`vers_start`,`sure_end`,`vers_end`),
+  CONSTRAINT `it_intertext_mapping_intertext_id_foreign` FOREIGN KEY (`intertext_id`) REFERENCES `it_intertext` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=8644 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Old table: belegstellen_mapping. It represents the mapping of a certain intertext. (Quran verses mapping)';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `it_intertext_source_text_original_translations`
+--
+
+DROP TABLE IF EXISTS `it_intertext_source_text_original_translations`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `it_intertext_source_text_original_translations` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `language_id` int(10) unsigned NOT NULL,
+  `intertext_id` int(10) unsigned NOT NULL,
+  `translator_id` int(10) unsigned NOT NULL,
+  `source_text_translation_reference` text COLLATE utf8mb4_unicode_ci,
+  `source_text_translation` text COLLATE utf8mb4_unicode_ci,
+  `created_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `updated_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `unique_index` (`language_id`,`intertext_id`,`translator_id`),
+  KEY `it_intertext_source_text_original_translations_foreign_2` (`intertext_id`),
+  KEY `it_intertext_source_text_original_translations_foreign_3` (`translator_id`),
+  CONSTRAINT `it_intertext_source_text_original_translations_foreign_1` FOREIGN KEY (`language_id`) REFERENCES `cc_translation_languages` (`id`),
+  CONSTRAINT `it_intertext_source_text_original_translations_foreign_2` FOREIGN KEY (`intertext_id`) REFERENCES `it_intertext` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `it_intertext_source_text_original_translations_foreign_3` FOREIGN KEY (`translator_id`) REFERENCES `cc_authors` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='It represents the translation of an original text.';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `it_intertext_text_editing`
+--
+
+DROP TABLE IF EXISTS `it_intertext_text_editing`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `it_intertext_text_editing` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `intertext_id` int(10) unsigned NOT NULL,
+  `author_id` int(10) unsigned NOT NULL,
+  `created_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `updated_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `unique_index` (`intertext_id`,`author_id`),
+  KEY `intertext_text_editing_foreign_2` (`author_id`),
+  CONSTRAINT `intertext_text_editing_foreign_1` FOREIGN KEY (`intertext_id`) REFERENCES `it_intertext` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `intertext_text_editing_foreign_2` FOREIGN KEY (`author_id`) REFERENCES `cc_authors` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='It represents the text editing of a certain intertext.';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `it_intertext_updaters`
+--
+
+DROP TABLE IF EXISTS `it_intertext_updaters`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `it_intertext_updaters` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `intertext_id` int(10) unsigned NOT NULL,
+  `author_id` int(10) unsigned NOT NULL,
+  `created_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `updated_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `unique_index` (`intertext_id`,`author_id`),
+  KEY `it_intertext_updaters_author_id_foreign` (`author_id`),
+  CONSTRAINT `it_intertext_updaters_author_id_foreign` FOREIGN KEY (`author_id`) REFERENCES `cc_authors` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `it_intertext_updaters_intertext_id_foreign` FOREIGN KEY (`intertext_id`) REFERENCES `it_intertext` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='It represents the updaters of a certain intertext.';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `it_original_languages`
+--
+
+DROP TABLE IF EXISTS `it_original_languages`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `it_original_languages` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `original_language` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `updated_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `it_original_languages_original_language_unique` (`original_language`)
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='It represents the languages of intertext original texts.';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `it_scripts`
+--
+
+DROP TABLE IF EXISTS `it_scripts`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `it_scripts` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `script` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `updated_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `it_scripts_script_unique` (`script`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='It represents the languages of intertext transcriptions.';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `it_source_author_information_authors`
+--
+
+DROP TABLE IF EXISTS `it_source_author_information_authors`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `it_source_author_information_authors` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `info_author_id` int(10) unsigned NOT NULL,
+  `author_id` int(10) unsigned NOT NULL,
+  `created_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `updated_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `unique_index` (`info_author_id`,`author_id`),
+  KEY `it_source_author_information_authors_author_id_foreign` (`author_id`),
+  CONSTRAINT `it_source_author_information_authors_author_id_foreign` FOREIGN KEY (`author_id`) REFERENCES `it_source_authors` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `it_source_author_information_authors_info_author_id_foreign` FOREIGN KEY (`info_author_id`) REFERENCES `cc_authors` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='It represents the authors of a certain source author information text.';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `it_source_author_information_translations`
+--
+
+DROP TABLE IF EXISTS `it_source_author_information_translations`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `it_source_author_information_translations` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `language_id` int(10) unsigned NOT NULL,
+  `source_author_id` int(10) unsigned NOT NULL,
+  `translator_id` int(10) unsigned NOT NULL,
+  `information_translation_reference` text COLLATE utf8mb4_unicode_ci,
+  `information_translation` text COLLATE utf8mb4_unicode_ci,
+  `created_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `updated_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `unique_index` (`language_id`,`source_author_id`,`translator_id`),
+  KEY `it_source_author_information_translations_foreign_2` (`source_author_id`),
+  KEY `it_source_author_information_translations_foreign_3` (`translator_id`),
+  CONSTRAINT `it_source_author_information_translations_foreign_1` FOREIGN KEY (`language_id`) REFERENCES `cc_translation_languages` (`id`),
+  CONSTRAINT `it_source_author_information_translations_foreign_2` FOREIGN KEY (`source_author_id`) REFERENCES `it_source_authors` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `it_source_author_information_translations_foreign_3` FOREIGN KEY (`translator_id`) REFERENCES `cc_authors` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='It represents the translation of a certain source author information text.';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `it_source_authors`
+--
+
+DROP TABLE IF EXISTS `it_source_authors`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `it_source_authors` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `author_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `source_information_text` text COLLATE utf8mb4_unicode_ci,
+  `created_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `updated_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `it_source_authors_author_name_unique` (`author_name`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='It represents the authors of sources.';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `it_source_information_authors`
+--
+
+DROP TABLE IF EXISTS `it_source_information_authors`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `it_source_information_authors` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `info_author_id` int(10) unsigned NOT NULL,
+  `source_id` int(10) unsigned NOT NULL,
+  `created_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `updated_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `unique_index` (`info_author_id`,`source_id`),
+  KEY `it_source_information_authors_source_id_foreign` (`source_id`),
+  CONSTRAINT `it_source_information_authors_info_author_id_foreign` FOREIGN KEY (`info_author_id`) REFERENCES `cc_authors` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `it_source_information_authors_source_id_foreign` FOREIGN KEY (`source_id`) REFERENCES `it_sources` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='It represents the authors of a certain source information text.';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `it_source_information_translations`
+--
+
+DROP TABLE IF EXISTS `it_source_information_translations`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `it_source_information_translations` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `language_id` int(10) unsigned NOT NULL,
+  `source_id` int(10) unsigned NOT NULL,
+  `translator_id` int(10) unsigned NOT NULL,
+  `information_translation_reference` text COLLATE utf8mb4_unicode_ci,
+  `information_translation` text COLLATE utf8mb4_unicode_ci,
+  `created_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `updated_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `unique_index` (`language_id`,`source_id`,`translator_id`),
+  KEY `it_source_information_translations_source_id_foreign` (`source_id`),
+  KEY `it_source_information_translations_translator_id_foreign` (`translator_id`),
+  CONSTRAINT `it_source_information_translations_language_id_foreign` FOREIGN KEY (`language_id`) REFERENCES `cc_translation_languages` (`id`),
+  CONSTRAINT `it_source_information_translations_source_id_foreign` FOREIGN KEY (`source_id`) REFERENCES `it_sources` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `it_source_information_translations_translator_id_foreign` FOREIGN KEY (`translator_id`) REFERENCES `cc_authors` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='It represents the translation of a certain source information text.';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `it_sources`
+--
+
+DROP TABLE IF EXISTS `it_sources`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `it_sources` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `source_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `author_id` int(10) unsigned NOT NULL,
+  `source_information_text` text COLLATE utf8mb4_unicode_ci,
+  `is_valid_source` tinyint(4) NOT NULL DEFAULT '0',
+  `created_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `updated_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `unique_index` (`source_name`,`author_id`),
+  UNIQUE KEY `it_sources_source_name_unique` (`source_name`),
+  KEY `it_sources_author_id_foreign` (`author_id`),
+  CONSTRAINT `it_sources_author_id_foreign` FOREIGN KEY (`author_id`) REFERENCES `it_source_authors` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='It represents the sources of intertexts. It can be a book, poetry, letter, and other types of text.';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `kommentar`
+--
+
+DROP TABLE IF EXISTS `kommentar`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `kommentar` (
+  `sure` int(11) NOT NULL,
+  `commentary_file` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `text_structure_file` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `bibliography_anmerkung` mediumtext COLLATE utf8mb4_unicode_ci,
+  `bibliography_kommentar` mediumtext COLLATE utf8mb4_unicode_ci,
+  `bibliography_literarkritik` mediumtext COLLATE utf8mb4_unicode_ci,
+  `bibliography_textkritik` mediumtext COLLATE utf8mb4_unicode_ci,
+  `bibliography_entwicklungsgeschichte` mediumtext COLLATE utf8mb4_unicode_ci,
+  `bibliography_inhaltstruktur` mediumtext COLLATE utf8mb4_unicode_ci,
+  `bibliography_situativitaet` mediumtext COLLATE utf8mb4_unicode_ci,
+  PRIMARY KEY (`sure`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `kommentar_belegstelle`
+--
+
+DROP TABLE IF EXISTS `kommentar_belegstelle`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `kommentar_belegstelle` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `sure` int(11) NOT NULL,
+  `belegstelle_id` int(11) NOT NULL,
+  `created_by` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `updated_by` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `kommentar_belegstelle_sure_foreign` (`sure`),
+  KEY `kommentar_belegstelle_belegstelle_id_foreign` (`belegstelle_id`),
+  CONSTRAINT `kommentar_belegstelle_belegstelle_id_foreign` FOREIGN KEY (`belegstelle_id`) REFERENCES `belegstellen` (`ID`),
+  CONSTRAINT `kommentar_belegstelle_sure_foreign` FOREIGN KEY (`sure`) REFERENCES `kommentar` (`sure`)
+) ENGINE=InnoDB AUTO_INCREMENT=190 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `koran`
+--
+
+DROP TABLE IF EXISTS `koran`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `koran` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `koranstelle` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Bild` varchar(25) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `praefix` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `sure` int(11) NOT NULL,
+  `vers` int(11) NOT NULL,
+  `surenname` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `kommentar` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6237 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `koran_arabisch`
+--
+
+DROP TABLE IF EXISTS `koran_arabisch`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `koran_arabisch` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `Ort` varchar(15) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Text` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=290 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `koran_uebersetzung`
+--
+
+DROP TABLE IF EXISTS `koran_uebersetzung`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `koran_uebersetzung` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `sprache` varchar(2) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `sure_vers` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `text` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `sure` int(11) DEFAULT NULL,
+  `vers` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=19456 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `koranstellen`
+--
+
+DROP TABLE IF EXISTS `koranstellen`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `koranstellen` (
+  `belegstellenID` int(11) NOT NULL DEFAULT '0',
+  `koranstelle` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  KEY `belegstellenID` (`belegstellenID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `lc_kkoran`
+--
+
+DROP TABLE IF EXISTS `lc_kkoran`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `lc_kkoran` (
+  `index` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `sure` decimal(3,0) DEFAULT NULL,
+  `vers` decimal(3,0) DEFAULT NULL,
+  `wort` decimal(3,0) DEFAULT NULL,
+  `transkription` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `wurzel` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `arab` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`index`),
+  UNIQUE KEY `sure` (`sure`,`vers`,`wort`)
+) ENGINE=InnoDB AUTO_INCREMENT=118022 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `lc_leseart`
+--
+
+DROP TABLE IF EXISTS `lc_leseart`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `lc_leseart` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `sure` int(10) unsigned NOT NULL DEFAULT '0',
+  `vers` int(10) unsigned NOT NULL DEFAULT '0',
+  `quelle_id` int(10) unsigned DEFAULT NULL,
+  `kommentar` text COLLATE utf8mb4_unicode_ci,
+  `kommentar_intern` text COLLATE utf8mb4_unicode_ci,
+  `kanonisch` enum('0','1') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
+  `created_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `updated_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `lc_leseart_quelle_id_foreign` (`quelle_id`),
+  CONSTRAINT `lc_leseart_quelle_id_foreign` FOREIGN KEY (`quelle_id`) REFERENCES `lc_quelle` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=18307 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `lc_leseart_leser`
+--
+
+DROP TABLE IF EXISTS `lc_leseart_leser`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `lc_leseart_leser` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `leser` int(10) unsigned NOT NULL DEFAULT '0',
+  `leseart` int(10) unsigned NOT NULL DEFAULT '0',
+  `created_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `updated_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `lc_leseart_leser_leseart_leser_unique` (`leseart`,`leser`),
+  KEY `lc_leseart_leser_leseart_index` (`leseart`),
+  KEY `lc_leseart_leser_leser_index` (`leser`),
+  CONSTRAINT `lc_leseart_leser_leseart_foreign` FOREIGN KEY (`leseart`) REFERENCES `lc_leseart` (`id`),
+  CONSTRAINT `lc_leseart_leser_leser_foreign` FOREIGN KEY (`leser`) REFERENCES `lc_leser` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=63311 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `lc_leser`
+--
+
+DROP TABLE IF EXISTS `lc_leser`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `lc_leser` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `anzeigename` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `sigle` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `abkuerzung` text COLLATE utf8mb4_unicode_ci,
+  `kommentar` text COLLATE utf8mb4_unicode_ci,
+  `ort` text COLLATE utf8mb4_unicode_ci,
+  `biografie` text COLLATE utf8mb4_unicode_ci,
+  `namekomplett` text COLLATE utf8mb4_unicode_ci,
+  `todesdatum` text COLLATE utf8mb4_unicode_ci,
+  `todesdatum_AH` text COLLATE utf8mb4_unicode_ci,
+  `ueberlieferer` text COLLATE utf8mb4_unicode_ci,
+  `ueberlieferertyp` text COLLATE utf8mb4_unicode_ci,
+  `kanonisch` tinyint(1) NOT NULL DEFAULT '0',
+  `created_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `updated_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `sigle` (`sigle`)
+) ENGINE=InnoDB AUTO_INCREMENT=901 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `lc_leser_alias`
+--
+
+DROP TABLE IF EXISTS `lc_leser_alias`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `lc_leser_alias` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `leser` int(11) NOT NULL,
+  `alias` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `lc_quelle`
+--
+
+DROP TABLE IF EXISTS `lc_quelle`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `lc_quelle` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `abkuerzung` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `quelle_arabisch` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `autor_arabisch` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `anzeigetitel` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `autor_langfassung` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `beschreibung` text COLLATE utf8mb4_unicode_ci,
+  `todesdatum` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `todesdatum_ah` text COLLATE utf8mb4_unicode_ci,
+  `ort` text COLLATE utf8mb4_unicode_ci,
+  `referenz` text COLLATE utf8mb4_unicode_ci,
+  `kanonisch` tinyint(1) NOT NULL DEFAULT '0',
+  `datum` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `sort` int(11) DEFAULT NULL,
+  `created_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `updated_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `abkuerzung` (`abkuerzung`)
+) ENGINE=InnoDB AUTO_INCREMENT=67 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `lc_quelle_author_roles`
+--
+
+DROP TABLE IF EXISTS `lc_quelle_author_roles`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `lc_quelle_author_roles` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `quelle_id` int(10) unsigned NOT NULL,
+  `author_role_id` int(10) unsigned NOT NULL,
+  `created_by` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `updated_by` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `lc_quelle_author_roles_quelle_id_foreign` (`quelle_id`),
+  KEY `lc_quelle_author_roles_author_role_id_foreign` (`author_role_id`),
+  CONSTRAINT `lc_quelle_author_roles_author_role_id_foreign` FOREIGN KEY (`author_role_id`) REFERENCES `cc_author_roles` (`id`),
+  CONSTRAINT `lc_quelle_author_roles_quelle_id_foreign` FOREIGN KEY (`quelle_id`) REFERENCES `lc_quelle` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `lc_quelle_leser`
+--
+
+DROP TABLE IF EXISTS `lc_quelle_leser`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `lc_quelle_leser` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `quelle_id` int(10) unsigned NOT NULL,
+  `leser_id` int(10) unsigned NOT NULL,
+  `created_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `updated_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `lc_quelle_leser_quelle_id_leser_id_unique` (`quelle_id`,`leser_id`),
+  KEY `lc_quelle_leser_leser_id_foreign` (`leser_id`),
+  CONSTRAINT `lc_quelle_leser_leser_id_foreign` FOREIGN KEY (`leser_id`) REFERENCES `lc_leser` (`id`),
+  CONSTRAINT `lc_quelle_leser_quelle_id_foreign` FOREIGN KEY (`quelle_id`) REFERENCES `lc_quelle` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `lc_variante`
+--
+
+DROP TABLE IF EXISTS `lc_variante`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `lc_variante` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `leseart` int(10) unsigned NOT NULL DEFAULT '0',
+  `wort` int(10) unsigned NOT NULL DEFAULT '0',
+  `variante` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `created_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `updated_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `lesart_worte` (`leseart`,`wort`),
+  UNIQUE KEY `lc_variante_leseart_wort_unique` (`leseart`,`wort`),
+  KEY `lc_variante_leseart_index` (`leseart`),
+  CONSTRAINT `lc_variante_leseart_foreign` FOREIGN KEY (`leseart`) REFERENCES `lc_leseart` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=462769 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `literatur`
+--
+
+DROP TABLE IF EXISTS `literatur`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `literatur` (
+  `LitID` int(11) NOT NULL AUTO_INCREMENT,
+  `Autor` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Titel` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`LitID`)
+) ENGINE=InnoDB AUTO_INCREMENT=6226 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `manuskript`
+--
+
+DROP TABLE IF EXISTS `manuskript`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `manuskript` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `Kodextitel` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Format` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Umfang` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Aufbewahrungsort` text COLLATE utf8mb4_unicode_ci,
+  `place_id` int(10) unsigned DEFAULT NULL,
+  `Signatur` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Herkunftsort` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Datierung` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `TextstelleKoran` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Materialzustand` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Zeilenzahl` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Fundort` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Textspiegel` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Materialart` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Kodikologie` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Schriftduktus` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Palaographie` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Textgliederung` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Literatur` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Bearbeiter` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Text` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Bild` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Kommentar_intern` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Kommentar` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `webtauglich` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Ornamente` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Bildnachweis` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `preferred_image_source` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `remarks_additional_folio` text COLLATE utf8mb4_unicode_ci,
+  `remarks_foliation` text COLLATE utf8mb4_unicode_ci,
+  `remarks_pagination` text COLLATE utf8mb4_unicode_ci,
+  PRIMARY KEY (`ID`),
+  KEY `manuskript_aufbewahrungsortid_index` (`place_id`),
+  CONSTRAINT `manuskript_place_id_foreign` FOREIGN KEY (`place_id`) REFERENCES `ms_places` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2006 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `manuskript_basic_readings_features`
+--
+
+DROP TABLE IF EXISTS `manuskript_basic_readings_features`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `manuskript_basic_readings_features` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `manuskript_id` int(11) NOT NULL,
+  `feature` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `manuskript_mapping`
+--
+
+DROP TABLE IF EXISTS `manuskript_mapping`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `manuskript_mapping` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `manuskript` int(11) NOT NULL,
+  `sure_start` int(11) NOT NULL,
+  `vers_start` int(11) NOT NULL,
+  `wort_start` int(11) NOT NULL,
+  `sure_ende` int(11) NOT NULL,
+  `vers_ende` int(11) NOT NULL,
+  `wort_ende` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=87135 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `manuskript_variant_reading_features`
+--
+
+DROP TABLE IF EXISTS `manuskript_variant_reading_features`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `manuskript_variant_reading_features` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `manuskript_id` int(11) NOT NULL,
+  `feature` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `definition` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=84 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `manuskriptseiten`
+--
+
+DROP TABLE IF EXISTS `manuskriptseiten`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `manuskriptseiten` (
+  `SeitenID` int(11) NOT NULL AUTO_INCREMENT,
+  `ManuskriptID` int(11) NOT NULL DEFAULT '0',
+  `Bearbeiter` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Transkription` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Folio` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Seite` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `FolioundSeite` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `TextstelleKoran` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Zeilenzahl` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Kommentar` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Kommentar_intern` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Palaeographie` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Bildlink` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Bildlink2` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `webtauglich` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Format` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Bildlinknachweis` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Bildlink2nachweis` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Scaler` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `digilib` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Ordner` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `width` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `thumb` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `detail` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `pn` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Ordner2` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `thumb2` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `detail2` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`SeitenID`),
+  KEY `manuskriptseiten_manuskriptid_index` (`ManuskriptID`)
+) ENGINE=InnoDB AUTO_INCREMENT=56720 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `manuskriptseiten_basic_readings_features`
+--
+
+DROP TABLE IF EXISTS `manuskriptseiten_basic_readings_features`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `manuskriptseiten_basic_readings_features` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `variant_reading_id` int(11) NOT NULL,
+  `feature` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `manuskriptseiten_bilder`
+--
+
+DROP TABLE IF EXISTS `manuskriptseiten_bilder`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `manuskriptseiten_bilder` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `manuskriptseite` int(11) NOT NULL,
+  `Bildlink` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `new_image_link` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `prior_image_link` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `Bildlink_extern` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Bildlinknachweis` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `webtauglich` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `sort` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `manuskriptseiten_bilder_manuskriptseite_index` (`manuskriptseite`)
+) ENGINE=InnoDB AUTO_INCREMENT=47351 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `manuskriptseiten_mapping`
+--
+
+DROP TABLE IF EXISTS `manuskriptseiten_mapping`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `manuskriptseiten_mapping` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `manuskriptseite` int(11) NOT NULL,
+  `sure_start` int(11) NOT NULL,
+  `vers_start` int(11) NOT NULL,
+  `wort_start` int(11) NOT NULL,
+  `sure_ende` int(11) NOT NULL,
+  `vers_ende` int(11) NOT NULL,
+  `wort_ende` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `manuskriptseiten_mapping_manuskriptseite_index` (`manuskriptseite`)
+) ENGINE=InnoDB AUTO_INCREMENT=700990 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `manuskriptseiten_variant_orthography`
+--
+
+DROP TABLE IF EXISTS `manuskriptseiten_variant_orthography`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `manuskriptseiten_variant_orthography` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `manuskriptseiten_id` int(11) NOT NULL,
+  `sure` int(11) NOT NULL,
+  `vers` int(11) NOT NULL,
+  `wort` int(11) NOT NULL,
+  `variant` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `comment` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `lastUser` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2632 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `manuskriptseiten_variant_orthography_features`
+--
+
+DROP TABLE IF EXISTS `manuskriptseiten_variant_orthography_features`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `manuskriptseiten_variant_orthography_features` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `orthography_variant_id` int(11) NOT NULL,
+  `feature` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=753 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `manuskriptseiten_variant_readings`
+--
+
+DROP TABLE IF EXISTS `manuskriptseiten_variant_readings`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `manuskriptseiten_variant_readings` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `manuskriptseite_id` int(11) NOT NULL,
+  `sure` int(11) NOT NULL,
+  `vers` int(11) NOT NULL,
+  `wort` int(11) NOT NULL,
+  `feature` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `comment` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `lastUser` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2099 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `manuskriptseiten_variant_readings_variants`
+--
+
+DROP TABLE IF EXISTS `manuskriptseiten_variant_readings_variants`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `manuskriptseiten_variant_readings_variants` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `variant_reading_id` int(11) NOT NULL,
+  `variant` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `normalized` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3621 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `manuskriptseiten_variant_readings_variants_features`
+--
+
+DROP TABLE IF EXISTS `manuskriptseiten_variant_readings_variants_features`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `manuskriptseiten_variant_readings_variants_features` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `variant_id` int(10) unsigned NOT NULL,
+  `feature` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `variants_features` (`variant_id`),
+  CONSTRAINT `variants_features` FOREIGN KEY (`variant_id`) REFERENCES `manuskriptseiten_variant_readings_variants` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `manuskriptseiten_verse_separators`
+--
+
+DROP TABLE IF EXISTS `manuskriptseiten_verse_separators`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `manuskriptseiten_verse_separators` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `manuskriptseiten_id` int(11) NOT NULL,
+  `sure` int(11) NOT NULL,
+  `vers` int(11) NOT NULL,
+  `wort` int(11) NOT NULL,
+  `type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `self_sure` int(11) DEFAULT NULL,
+  `self_vers` int(11) DEFAULT NULL,
+  `self_wort` int(11) DEFAULT NULL,
+  `comment` text COLLATE utf8mb4_unicode_ci,
+  `description` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=132 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `migrations`
+--
+
+DROP TABLE IF EXISTS `migrations`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `migrations` (
+  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `batch` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ms_antiquity_markets`
+--
+
+DROP TABLE IF EXISTS `ms_antiquity_markets`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `ms_antiquity_markets` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `antiquity_market` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `updated_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `ms_auction_houses_auction_house_unique` (`antiquity_market`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='The antiquity markets where manuscripts are bought and sold.';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ms_attributed_to`
+--
+
+DROP TABLE IF EXISTS `ms_attributed_to`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `ms_attributed_to` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `person` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `updated_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `ms_attributed_to_person_unique` (`person`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='It represents the people whom manuscripts attributed.';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ms_diacritics`
+--
+
+DROP TABLE IF EXISTS `ms_diacritics`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `ms_diacritics` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `diacritic` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `updated_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='It represents the diacritics of manuscripts.';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ms_funders`
+--
+
+DROP TABLE IF EXISTS `ms_funders`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `ms_funders` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `funder` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `updated_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `ms_funders_funder_unique` (`funder`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='It represents the funders of the manuscript project.';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ms_image_tmp_link`
+--
+
+DROP TABLE IF EXISTS `ms_image_tmp_link`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `ms_image_tmp_link` (
+  `uuid` varchar(36) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `image_id` int(10) unsigned NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`uuid`),
+  KEY `ms_image_tmp_link_image_id_foreign` (`image_id`),
+  CONSTRAINT `ms_image_tmp_link_image_id_foreign` FOREIGN KEY (`image_id`) REFERENCES `ms_manuscript_pages_images` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ms_manuscript`
+--
+
+DROP TABLE IF EXISTS `ms_manuscript`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `ms_manuscript` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `call_number` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `place_id` int(10) unsigned DEFAULT NULL,
+  `is_online` tinyint(1) NOT NULL,
+  `no_images` tinyint(1) NOT NULL,
+  `dimensions` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `format_text_field` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `number_of_lines` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `number_of_folios` int(11) DEFAULT NULL,
+  `carbon_dating` text COLLATE utf8mb4_unicode_ci,
+  `date_start` int(11) DEFAULT NULL,
+  `date_end` int(11) DEFAULT NULL,
+  `writing_surface` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `original_codex_id` int(10) unsigned DEFAULT NULL,
+  `palimpsest` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `palimpsest_text` mediumtext COLLATE utf8mb4_unicode_ci,
+  `sajda_signs` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `sajda_signs_text` mediumtext COLLATE utf8mb4_unicode_ci,
+  `colophon` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `colophon_text` mediumtext COLLATE utf8mb4_unicode_ci,
+  `colophon_date_start` date DEFAULT NULL,
+  `colophon_date_end` date DEFAULT NULL,
+  `doi` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `credit_line_image` text COLLATE utf8mb4_unicode_ci,
+  `codicology` text COLLATE utf8mb4_unicode_ci,
+  `paleography` text COLLATE utf8mb4_unicode_ci,
+  `commentary_internal` text COLLATE utf8mb4_unicode_ci,
+  `ornaments` text COLLATE utf8mb4_unicode_ci,
+  `catalogue_entry` text COLLATE utf8mb4_unicode_ci,
+  `transliteration_file` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `updated_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `ms_manuscript_call_number_place_id_unique` (`call_number`,`place_id`),
+  KEY `ms_manuscript_place_id_foreign` (`place_id`),
+  KEY `ms_manuscript_original_codex_id_foreign` (`original_codex_id`),
+  CONSTRAINT `ms_manuscript_original_codex_id_foreign` FOREIGN KEY (`original_codex_id`) REFERENCES `ms_original_codexes` (`id`),
+  CONSTRAINT `ms_manuscript_place_id_foreign` FOREIGN KEY (`place_id`) REFERENCES `ms_places` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3081 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Old table: manuskript. It represents manuscript metadata.';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ms_manuscript_antiquity_markets`
+--
+
+DROP TABLE IF EXISTS `ms_manuscript_antiquity_markets`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `ms_manuscript_antiquity_markets` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `manuscript_id` int(10) unsigned DEFAULT NULL,
+  `antiquity_market_id` int(10) unsigned DEFAULT NULL,
+  `created_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `updated_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `unique_index` (`manuscript_id`,`antiquity_market_id`),
+  KEY `ms_manuscript_antiquity_markets_auction_house_id_foreign` (`antiquity_market_id`),
+  CONSTRAINT `ms_manuscript_antiquity_markets_auction_house_id_foreign` FOREIGN KEY (`antiquity_market_id`) REFERENCES `ms_antiquity_markets` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `ms_manuscript_antiquity_markets_manuscript_id_foreign` FOREIGN KEY (`manuscript_id`) REFERENCES `ms_manuscript` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='It represents the exact event when a certain manuscript is auctioned.';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ms_manuscript_attributed_to`
+--
+
+DROP TABLE IF EXISTS `ms_manuscript_attributed_to`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `ms_manuscript_attributed_to` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `manuscript_id` int(10) unsigned NOT NULL,
+  `attributed_to_id` int(10) unsigned NOT NULL,
+  `created_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `updated_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `unique_index` (`manuscript_id`,`attributed_to_id`),
+  KEY `ms_manuscript_attributed_to_attributed_to_id_foreign` (`attributed_to_id`),
+  CONSTRAINT `ms_manuscript_attributed_to_attributed_to_id_foreign` FOREIGN KEY (`attributed_to_id`) REFERENCES `ms_attributed_to` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `ms_manuscript_attributed_to_manuscript_id_foreign` FOREIGN KEY (`manuscript_id`) REFERENCES `ms_manuscript` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='It represents the person whom a certain manuscript attributed.';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ms_manuscript_author_roles`
+--
+
+DROP TABLE IF EXISTS `ms_manuscript_author_roles`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `ms_manuscript_author_roles` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `manuscript_id` int(10) unsigned NOT NULL,
+  `author_role_id` int(10) unsigned DEFAULT NULL,
+  `created_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `updated_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `ms_manuscript_author_roles_manuscript_id_author_role_id_unique` (`manuscript_id`,`author_role_id`),
+  KEY `ms_manuscript_author_roles_author_role_id_foreign` (`author_role_id`),
+  CONSTRAINT `ms_manuscript_author_roles_author_role_id_foreign` FOREIGN KEY (`author_role_id`) REFERENCES `cc_author_roles` (`id`),
+  CONSTRAINT `ms_manuscript_author_roles_manuscript_id_foreign` FOREIGN KEY (`manuscript_id`) REFERENCES `ms_manuscript` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6273 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='It represents the manuscript metadata authors of a certain manuscript.';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ms_manuscript_colophon_text_translations`
+--
+
+DROP TABLE IF EXISTS `ms_manuscript_colophon_text_translations`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `ms_manuscript_colophon_text_translations` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `language_id` int(10) unsigned NOT NULL,
+  `manuscript_id` int(10) unsigned NOT NULL,
+  `translator_id` int(10) unsigned NOT NULL,
+  `colophon_text_translation_reference` text COLLATE utf8mb4_unicode_ci,
+  `colophon_text_translation` text COLLATE utf8mb4_unicode_ci,
+  `created_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `updated_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `unique_index` (`language_id`,`manuscript_id`,`translator_id`),
+  KEY `ms_manuscript_colophon_text_translations_manuscript_id_foreign` (`manuscript_id`),
+  KEY `ms_manuscript_colophon_text_translations_translator_id_foreign` (`translator_id`),
+  CONSTRAINT `ms_manuscript_colophon_text_translations_language_id_foreign` FOREIGN KEY (`language_id`) REFERENCES `cc_translation_languages` (`id`),
+  CONSTRAINT `ms_manuscript_colophon_text_translations_manuscript_id_foreign` FOREIGN KEY (`manuscript_id`) REFERENCES `ms_manuscript` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `ms_manuscript_colophon_text_translations_translator_id_foreign` FOREIGN KEY (`translator_id`) REFERENCES `cc_authors` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='It represents the translation of a colophon text.';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ms_manuscript_diacritics`
+--
+
+DROP TABLE IF EXISTS `ms_manuscript_diacritics`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `ms_manuscript_diacritics` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `manuscript_id` int(10) unsigned NOT NULL,
+  `diacritic_id` int(10) unsigned NOT NULL,
+  `created_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `updated_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `unique_index` (`manuscript_id`,`diacritic_id`),
+  KEY `ms_manuscript_diacritics_diacritic_id_foreign` (`diacritic_id`),
+  CONSTRAINT `ms_manuscript_diacritics_diacritic_id_foreign` FOREIGN KEY (`diacritic_id`) REFERENCES `ms_diacritics` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `ms_manuscript_diacritics_manuscript_id_foreign` FOREIGN KEY (`manuscript_id`) REFERENCES `ms_manuscript` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=701 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='It represents the diacritics of a certain manuscript.';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ms_manuscript_funders`
+--
+
+DROP TABLE IF EXISTS `ms_manuscript_funders`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `ms_manuscript_funders` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `manuscript_id` int(10) unsigned NOT NULL,
+  `funder_id` int(10) unsigned NOT NULL,
+  `created_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `updated_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `unique_index` (`manuscript_id`,`funder_id`),
+  KEY `ms_manuscript_funders_funder_id_foreign` (`funder_id`),
+  CONSTRAINT `ms_manuscript_funders_funder_id_foreign` FOREIGN KEY (`funder_id`) REFERENCES `ms_funders` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `ms_manuscript_funders_manuscript_id_foreign` FOREIGN KEY (`manuscript_id`) REFERENCES `ms_manuscript` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=1919 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='It represents the funders of a certain manuscript.';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ms_manuscript_mapping`
+--
+
+DROP TABLE IF EXISTS `ms_manuscript_mapping`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `ms_manuscript_mapping` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `manuscript_id` int(10) unsigned DEFAULT NULL,
+  `sura_start` decimal(3,0) NOT NULL,
+  `verse_start` decimal(3,0) NOT NULL,
+  `word_start` decimal(3,0) DEFAULT NULL,
+  `sura_end` decimal(3,0) NOT NULL,
+  `verse_end` decimal(3,0) NOT NULL,
+  `word_end` decimal(3,0) DEFAULT NULL,
+  `created_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `updated_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `ms_manuscript_mapping_manuscript_id_index` (`manuscript_id`),
+  KEY `mapping_index` (`sura_start`,`verse_start`,`sura_end`,`verse_end`),
+  CONSTRAINT `ms_manuscript_mapping_manuscript_id_foreign` FOREIGN KEY (`manuscript_id`) REFERENCES `ms_manuscript` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=1242248 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Old table: manuskript_mapping. It represents mapping table for manuscript, in contrast to ms_manuscript_pages_mapping the datasets are summarized.';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ms_manuscript_pages`
+--
+
+DROP TABLE IF EXISTS `ms_manuscript_pages`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `ms_manuscript_pages` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `manuscript_id` int(10) unsigned DEFAULT NULL,
+  `folio` int(11) DEFAULT NULL,
+  `page_side` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `is_online` tinyint(1) NOT NULL,
+  `created_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `updated_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `ms_manuscript_pages_manuscript_id_foreign` (`manuscript_id`),
+  CONSTRAINT `ms_manuscript_pages_manuscript_id_foreign` FOREIGN KEY (`manuscript_id`) REFERENCES `ms_manuscript` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=113891 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Old table: manuskriptseiten. It represents the manuscript pages of a certain manuscript.';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ms_manuscript_pages_images`
+--
+
+DROP TABLE IF EXISTS `ms_manuscript_pages_images`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `ms_manuscript_pages_images` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `manuscript_page_id` int(10) unsigned DEFAULT NULL,
+  `private_use_only` tinyint(1) NOT NULL,
+  `image_link` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `original_filename` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `iiif_external` varchar(250) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `thumbnail_external` varchar(250) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `new_image_link` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `prior_image_link` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `image_link_external` text COLLATE utf8mb4_unicode_ci,
+  `credit_line_image` text COLLATE utf8mb4_unicode_ci,
+  `created_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `updated_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `sort` int(11) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `ms_manuscript_pages_images_manuscript_page_id_sort_unique` (`manuscript_page_id`,`sort`),
+  KEY `ms_manuscript_pages_images_manuscript_page_id_foreign` (`manuscript_page_id`),
+  CONSTRAINT `ms_manuscript_pages_images_manuscript_page_id_foreign` FOREIGN KEY (`manuscript_page_id`) REFERENCES `ms_manuscript_pages` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=107243 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Old table: manuskriptseiten_bilder. It represents the digilib link to a certain manuscript page image.';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ms_manuscript_pages_mapping`
+--
+
+DROP TABLE IF EXISTS `ms_manuscript_pages_mapping`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `ms_manuscript_pages_mapping` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `manuscript_page_id` int(10) unsigned DEFAULT NULL,
+  `sura_start` decimal(3,0) NOT NULL,
+  `verse_start` decimal(3,0) NOT NULL,
+  `word_start` decimal(3,0) DEFAULT NULL,
+  `sura_end` decimal(3,0) NOT NULL,
+  `verse_end` decimal(3,0) NOT NULL,
+  `word_end` decimal(3,0) DEFAULT NULL,
+  `created_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `updated_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `ms_manuscript_pages_mapping_manuscript_page_id_index` (`manuscript_page_id`),
+  KEY `mapping_index` (`sura_start`,`verse_start`,`word_start`,`sura_end`,`verse_end`,`word_end`),
+  CONSTRAINT `ms_manuscript_pages_mapping_manuscript_page_id_foreign` FOREIGN KEY (`manuscript_page_id`) REFERENCES `ms_manuscript_pages` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=725567 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Old table: manuskriptseiten_mapping. It represents a mapping table for manuscript pages (Quran words mapping).';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ms_manuscript_palimpsest_text_translations`
+--
+
+DROP TABLE IF EXISTS `ms_manuscript_palimpsest_text_translations`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `ms_manuscript_palimpsest_text_translations` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `language_id` int(10) unsigned NOT NULL,
+  `manuscript_id` int(10) unsigned NOT NULL,
+  `translator_id` int(10) unsigned NOT NULL,
+  `palimpsest_text_translation_reference` text COLLATE utf8mb4_unicode_ci,
+  `palimpsest_text_translation` text COLLATE utf8mb4_unicode_ci,
+  `created_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `updated_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `unique_index` (`language_id`,`manuscript_id`,`translator_id`),
+  KEY `manuscript_palimpsest_text_translations_foreign_2` (`manuscript_id`),
+  KEY `manuscript_palimpsest_text_translations_foreign_3` (`translator_id`),
+  CONSTRAINT `manuscript_palimpsest_text_translations_foreign_1` FOREIGN KEY (`language_id`) REFERENCES `cc_translation_languages` (`id`),
+  CONSTRAINT `manuscript_palimpsest_text_translations_foreign_2` FOREIGN KEY (`manuscript_id`) REFERENCES `ms_manuscript` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `manuscript_palimpsest_text_translations_foreign_3` FOREIGN KEY (`translator_id`) REFERENCES `cc_authors` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='It represents the translation of a palimpsest text.';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ms_manuscript_provenances`
+--
+
+DROP TABLE IF EXISTS `ms_manuscript_provenances`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `ms_manuscript_provenances` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `manuscript_id` int(10) unsigned NOT NULL,
+  `provenance_id` int(10) unsigned NOT NULL,
+  `created_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `updated_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `unique_index` (`manuscript_id`,`provenance_id`),
+  KEY `ms_manuscript_provenances_provenance_id_foreign` (`provenance_id`),
+  CONSTRAINT `ms_manuscript_provenances_manuscript_id_foreign` FOREIGN KEY (`manuscript_id`) REFERENCES `ms_manuscript` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `ms_manuscript_provenances_provenance_id_foreign` FOREIGN KEY (`provenance_id`) REFERENCES `ms_provenances` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=626 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='It represents the provenances of a certain manuscript.';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ms_manuscript_reading_signs`
+--
+
+DROP TABLE IF EXISTS `ms_manuscript_reading_signs`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `ms_manuscript_reading_signs` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `manuscript_id` int(10) unsigned NOT NULL,
+  `reading_sign_id` int(10) unsigned NOT NULL,
+  `created_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `updated_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `ms_manuscript_reading_signs_manuscript_id_reading_sign_id_unique` (`manuscript_id`,`reading_sign_id`),
+  KEY `ms_manuscript_reading_signs_reading_sign_id_foreign` (`reading_sign_id`),
+  CONSTRAINT `ms_manuscript_reading_signs_manuscript_id_foreign` FOREIGN KEY (`manuscript_id`) REFERENCES `ms_manuscript` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `ms_manuscript_reading_signs_reading_sign_id_foreign` FOREIGN KEY (`reading_sign_id`) REFERENCES `ms_reading_signs` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='It represents the reading signs or vowel signs of a certain manuscript.';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ms_manuscript_reading_signs_functions`
+--
+
+DROP TABLE IF EXISTS `ms_manuscript_reading_signs_functions`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `ms_manuscript_reading_signs_functions` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `manuscript_id` int(10) unsigned DEFAULT NULL,
+  `reading_sign_function` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `updated_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `unique_index` (`manuscript_id`,`reading_sign_function`),
+  CONSTRAINT `ms_manuscript_reading_signs_functions_manuscript_id_foreign` FOREIGN KEY (`manuscript_id`) REFERENCES `ms_manuscript` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='It represents the function of reading signs of a certain manuscript.';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ms_manuscript_rwt_provenances`
+--
+
+DROP TABLE IF EXISTS `ms_manuscript_rwt_provenances`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `ms_manuscript_rwt_provenances` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `manuscript_id` int(10) unsigned NOT NULL,
+  `provenance_id` int(10) unsigned NOT NULL,
+  `created_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `updated_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `unique_index` (`manuscript_id`,`provenance_id`),
+  KEY `manuscript_rwt_provenances_foreign_2` (`provenance_id`),
+  CONSTRAINT `manuscript_rwt_provenances_foreign_1` FOREIGN KEY (`manuscript_id`) REFERENCES `ms_manuscript` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `manuscript_rwt_provenances_foreign_2` FOREIGN KEY (`provenance_id`) REFERENCES `ms_provenances` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='It represents the regional writing tradition provenances of a certain manuscript.';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ms_manuscript_sajda_signs_text_translations`
+--
+
+DROP TABLE IF EXISTS `ms_manuscript_sajda_signs_text_translations`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `ms_manuscript_sajda_signs_text_translations` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `language_id` int(10) unsigned NOT NULL,
+  `manuscript_id` int(10) unsigned NOT NULL,
+  `translator_id` int(10) unsigned NOT NULL,
+  `sajda_signs_text_translation_reference` text COLLATE utf8mb4_unicode_ci,
+  `sajda_signs_text_translation` text COLLATE utf8mb4_unicode_ci,
+  `created_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `updated_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `unique_index` (`language_id`,`manuscript_id`,`translator_id`),
+  KEY `manuscript_sajda_signs_text_translations_foreign_2` (`manuscript_id`),
+  KEY `manuscript_sajda_signs_text_translations_foreign_3` (`translator_id`),
+  CONSTRAINT `manuscript_sajda_signs_text_translations_foreign_1` FOREIGN KEY (`language_id`) REFERENCES `cc_translation_languages` (`id`),
+  CONSTRAINT `manuscript_sajda_signs_text_translations_foreign_2` FOREIGN KEY (`manuscript_id`) REFERENCES `ms_manuscript` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `manuscript_sajda_signs_text_translations_foreign_3` FOREIGN KEY (`translator_id`) REFERENCES `cc_authors` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='It represents the translation of a sajda signs text.';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ms_manuscript_script_styles`
+--
+
+DROP TABLE IF EXISTS `ms_manuscript_script_styles`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `ms_manuscript_script_styles` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `manuscript_id` int(10) unsigned NOT NULL,
+  `style_id` int(10) unsigned NOT NULL,
+  `created_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `updated_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `unique_index` (`manuscript_id`,`style_id`),
+  KEY `ms_manuscript_script_styles_style_id_foreign` (`style_id`),
+  CONSTRAINT `ms_manuscript_script_styles_manuscript_id_foreign` FOREIGN KEY (`manuscript_id`) REFERENCES `ms_manuscript` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `ms_manuscript_script_styles_style_id_foreign` FOREIGN KEY (`style_id`) REFERENCES `ms_script_styles` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=2390 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='It represents the script styles of a certain manuscript.';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ms_manuscript_verse_segmentations`
+--
+
+DROP TABLE IF EXISTS `ms_manuscript_verse_segmentations`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `ms_manuscript_verse_segmentations` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `manuscript_id` int(10) unsigned NOT NULL,
+  `verse_segmentation_id` int(10) unsigned NOT NULL,
+  `created_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `updated_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `ms_manuscript_verse_segmentations_manuscript_id_foreign` (`manuscript_id`),
+  KEY `ms_manuscript_verse_segmentations_verse_segmentation_id_foreign` (`verse_segmentation_id`),
+  CONSTRAINT `ms_manuscript_verse_segmentations_manuscript_id_foreign` FOREIGN KEY (`manuscript_id`) REFERENCES `ms_manuscript` (`id`),
+  CONSTRAINT `ms_manuscript_verse_segmentations_verse_segmentation_id_foreign` FOREIGN KEY (`verse_segmentation_id`) REFERENCES `ms_verse_segmentations` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ms_original_codexes`
+--
+
+DROP TABLE IF EXISTS `ms_original_codexes`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `ms_original_codexes` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `original_codex_name` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `supercategory` int(10) unsigned DEFAULT NULL,
+  `script_style_id` int(10) unsigned DEFAULT NULL,
+  `created_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `updated_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `ms_original_codexes_supercategory_original_codex_name_unique` (`supercategory`,`original_codex_name`),
+  UNIQUE KEY `ms_original_codexes_original_codex_name_unique` (`original_codex_name`),
+  KEY `ms_original_codexes_script_style_id_foreign` (`script_style_id`),
+  KEY `ms_original_codexes_original_codex_name_index` (`original_codex_name`),
+  CONSTRAINT `ms_original_codexes_script_style_id_foreign` FOREIGN KEY (`script_style_id`) REFERENCES `ms_script_styles` (`id`),
+  CONSTRAINT `ms_original_codexes_supercategory_foreign` FOREIGN KEY (`supercategory`) REFERENCES `ms_original_codexes` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='It represents the category of manuscripts.';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ms_places`
+--
+
+DROP TABLE IF EXISTS `ms_places`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `ms_places` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `place` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `place_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `country_code` varchar(2) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description_id` int(10) unsigned DEFAULT NULL,
+  `link` text COLLATE utf8mb4_unicode_ci,
+  `image_link` text COLLATE utf8mb4_unicode_ci,
+  `image_original_link` text COLLATE utf8mb4_unicode_ci,
+  `image_description` text COLLATE utf8mb4_unicode_ci,
+  `longitude` decimal(10,7) DEFAULT NULL,
+  `latitude` decimal(10,7) DEFAULT NULL,
+  `geonames` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `updated_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `ms_places_place_name_longitude_latitude_geonames_unique` (`place_name`,`longitude`,`latitude`,`geonames`),
+  UNIQUE KEY `ms_places_place_name_unique` (`place_name`),
+  KEY `ms_places_translation_id_foreign` (`description_id`),
+  CONSTRAINT `ms_places_translation_id_foreign` FOREIGN KEY (`description_id`) REFERENCES `translations` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=117 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='old table: aufbewahrungstorte. It represents the location where the manuscripts are stored.';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ms_provenances`
+--
+
+DROP TABLE IF EXISTS `ms_provenances`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `ms_provenances` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `provenance` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `updated_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `ms_provenances_provenance_unique` (`provenance`)
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='It represents the place of origin of manuscripts.';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ms_reading_signs`
+--
+
+DROP TABLE IF EXISTS `ms_reading_signs`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `ms_reading_signs` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `reading_sign` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `updated_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `ms_reading_signs_reading_sign_unique` (`reading_sign`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='It represents the reading signs or vowel signs a manuscript can have.';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ms_script_styles`
+--
+
+DROP TABLE IF EXISTS `ms_script_styles`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `ms_script_styles` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `style` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `updated_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `ms_script_styles_style_unique` (`style`)
+) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='It represents the script styles of manuscripts, according to Deroche.';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ms_verse_segmentations`
+--
+
+DROP TABLE IF EXISTS `ms_verse_segmentations`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `ms_verse_segmentations` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `updated_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `password_resets`
+--
+
+DROP TABLE IF EXISTS `password_resets`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `password_resets` (
+  `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  KEY `password_resets_email_index` (`email`),
+  KEY `password_resets_token_index` (`token`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `permalink_images`
+--
+
+DROP TABLE IF EXISTS `permalink_images`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `permalink_images` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `reference` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `original_base_url` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `original_manuscript_page` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `original_manuscript_image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=41683 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `permission_role`
+--
+
+DROP TABLE IF EXISTS `permission_role`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `permission_role` (
+  `permission_id` int(10) unsigned NOT NULL,
+  `role_id` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`permission_id`,`role_id`),
+  KEY `permission_role_role_id_foreign` (`role_id`),
+  CONSTRAINT `permission_role_permission_id_foreign` FOREIGN KEY (`permission_id`) REFERENCES `permissions` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `permission_role_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `permissions`
+--
+
+DROP TABLE IF EXISTS `permissions`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `permissions` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `display_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `permissions_name_unique` (`name`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `persistent_identifier`
+--
+
+DROP TABLE IF EXISTS `persistent_identifier`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `persistent_identifier` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `pid` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `original_id` int(11) NOT NULL,
+  `original_relation` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=39989 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `personal_access_tokens`
+--
+
+DROP TABLE IF EXISTS `personal_access_tokens`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `personal_access_tokens` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `tokenable_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tokenable_id` bigint(20) unsigned NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `abilities` text COLLATE utf8mb4_unicode_ci,
+  `last_used_at` timestamp NULL DEFAULT NULL,
+  `expires_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `personal_access_tokens_token_unique` (`token`),
+  KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `qortbl2`
+--
+
+DROP TABLE IF EXISTS `qortbl2`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `qortbl2` (
+  `location` bigint(20) NOT NULL DEFAULT '0',
+  `suraverse` int(11) DEFAULT NULL,
+  `sure_cc` decimal(3,0) DEFAULT NULL,
+  `vers_cc` decimal(3,0) DEFAULT NULL,
+  `wort_cc` decimal(3,0) DEFAULT NULL,
+  `word_num` int(11) DEFAULT NULL,
+  `analyse` int(11) DEFAULT NULL,
+  `word` varchar(25) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `word_cc` varchar(25) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `base` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `base_cc` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `root` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `root_cc` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `prefix1` varchar(5) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `prefix1_part_of_speech` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `prefix1_semantic` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `prefix2` varchar(5) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `prefix2_part_of_speech` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `prefix2_semantic` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `prefix3` varchar(5) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `prefix3_part_of_speech` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `prefix3_semantic` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `part_of_speech` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `subcategory` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `semantic` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `semantic2` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `pattern` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `aspect` varchar(15) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `actpass` varchar(7) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `mortality` varchar(15) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `mood` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `prefix` varchar(55) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `gender` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `number` varchar(9) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `casefld` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `person` varchar(4) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `dependent_pron` char(1) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `dependent_person` varchar(4) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `dependent_number` varchar(9) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `dependent_gender` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `definite` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `diptotic` varchar(12) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `full_analyse` varchar(250) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  UNIQUE KEY `location` (`location`),
+  KEY `suraverse` (`suraverse`),
+  KEY `word` (`word`),
+  KEY `word_cc` (`word_cc`),
+  KEY `base` (`base`),
+  KEY `base_cc` (`base_cc`),
+  KEY `root` (`root`),
+  KEY `root_cc` (`root_cc`),
+  KEY `part_of_speech` (`part_of_speech`),
+  KEY `semantic` (`semantic`),
+  KEY `pattern` (`pattern`),
+  KEY `aspect` (`aspect`),
+  KEY `suraandverse` (`sure_cc`,`vers_cc`),
+  KEY `qortbl2_sure_cc_vers_cc_index` (`sure_cc`,`vers_cc`),
+  KEY `qortbl2_sure_cc_vers_cc_wort_cc_index` (`sure_cc`,`vers_cc`,`wort_cc`),
+  CONSTRAINT `qortbl2_sure_cc_vers_cc_foreign` FOREIGN KEY (`sure_cc`, `vers_cc`) REFERENCES `lc_kkoran` (`sure`, `vers`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `rights`
+--
+
+DROP TABLE IF EXISTS `rights`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `rights` (
+  `ID` int(11) NOT NULL,
+  `value` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `table` text COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `role_user`
+--
+
+DROP TABLE IF EXISTS `role_user`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `role_user` (
+  `user_id` int(10) unsigned NOT NULL,
+  `role_id` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`user_id`,`role_id`),
+  KEY `role_user_role_id_foreign` (`role_id`),
+  CONSTRAINT `role_user_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `role_user_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `roles`
+--
+
+DROP TABLE IF EXISTS `roles`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `roles` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `display_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `roles_name_unique` (`name`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `translations`
+--
+
+DROP TABLE IF EXISTS `translations`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `translations` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `key` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `de` text COLLATE utf8mb4_unicode_ci,
+  `en` text COLLATE utf8mb4_unicode_ci,
+  `fr` text COLLATE utf8mb4_unicode_ci,
+  `ar` text COLLATE utf8mb4_unicode_ci,
+  `fa` text COLLATE utf8mb4_unicode_ci,
+  `ru` text COLLATE utf8mb4_unicode_ci,
+  `tr` text COLLATE utf8mb4_unicode_ci,
+  `ur` text COLLATE utf8mb4_unicode_ci,
+  `ind` text COLLATE utf8mb4_unicode_ci,
+  `user_id` int(10) unsigned NOT NULL,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `translations_key_unique` (`key`),
+  KEY `translations_user_id_foreign` (`user_id`),
+  CONSTRAINT `translations_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=921 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `transliterations`
+--
+
+DROP TABLE IF EXISTS `transliterations`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `transliterations` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `manuscript_page_id` int(11) NOT NULL,
+  `linenumber` int(11) NOT NULL,
+  `HTML` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `XML` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `transliterations` (`manuscript_page_id`),
+  CONSTRAINT `transliterations` FOREIGN KEY (`manuscript_page_id`) REFERENCES `manuskriptseiten` (`SeitenID`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=1137 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `users`
+--
+
+DROP TABLE IF EXISTS `users`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `users` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` varchar(60) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `users_email_unique` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=86 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `users_legacy`
+--
+
+DROP TABLE IF EXISTS `users_legacy`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `users_legacy` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `Username` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Password` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `veranstaltungen`
+--
+
+DROP TABLE IF EXISTS `veranstaltungen`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `veranstaltungen` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `titel` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `datum_start` datetime NOT NULL,
+  `datum_ende` datetime NOT NULL,
+  `ort` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `beschreibung` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `user_id` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `veranstaltungen_user_id_foreign` (`user_id`),
+  CONSTRAINT `veranstaltungen_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `zotero_bibliography`
+--
+
+DROP TABLE IF EXISTS `zotero_bibliography`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `zotero_bibliography` (
+  `zotero_key` varchar(8) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `zotero_version` int(11) NOT NULL,
+  `citation` text COLLATE utf8mb4_unicode_ci,
+  `short_citation` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`zotero_key`),
+  UNIQUE KEY `unique_index` (`zotero_key`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping events for database 'corpuscoranicum'
+--
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2024-11-22 10:49:58
